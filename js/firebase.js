@@ -1,14 +1,25 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
 import { getDatabase, ref, set, push, onValue } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-database.js";
 
-const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+// Soporte para sitio estático: primero intenta tomar `window.FIREBASE_CONFIG` (añadir
+// un <script> en index.html). Si no existe, intenta leer `import.meta.env` (Vite).
+const env = (typeof import.meta !== 'undefined' && import.meta.env) ? import.meta.env : {};
+const winCfg = (typeof window !== 'undefined' && window.FIREBASE_CONFIG) ? window.FIREBASE_CONFIG : null;
+
+const firebaseConfig = winCfg || {
+    apiKey: env.VITE_FIREBASE_API_KEY || "",
+    authDomain: env.VITE_FIREBASE_AUTH_DOMAIN || "",
+    projectId: env.VITE_FIREBASE_PROJECT_ID || "",
+    storageBucket: env.VITE_FIREBASE_STORAGE_BUCKET || "",
+    messagingSenderId: env.VITE_FIREBASE_MESSAGING_SENDER_ID || "",
+    appId: env.VITE_FIREBASE_APP_ID || "",
+    // opcional: databaseURL: env.VITE_FIREBASE_DATABASE_URL || "",
 };
+
+// Validación básica para ayudar a debuggear
+if (!firebaseConfig || !firebaseConfig.apiKey) {
+    console.error("Firebase configuration missing. Define window.FIREBASE_CONFIG in index.html or set VITE_FIREBASE_* env variables.");
+}
 
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
