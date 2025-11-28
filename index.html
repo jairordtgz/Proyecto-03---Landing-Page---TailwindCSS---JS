@@ -350,64 +350,40 @@
                 </div>
             </div>
 
-            <!-- FORMULARIO -->
-            <form
-                id="formCorreo"
-                class="tw-flex tw-h-[60px] tw-place-items-center tw-gap-2 tw-py-2 tw-overflow-hidden"
-            >
-                <!-- INPUT DE CORREO -->
-                <input
-                    type="email"
-                    id="correo"
-                    class="input tw-h-full tw-w-full !tw-border-gray-600 tw-p-2 tw-outline-none tw-bg-[#0d0d0d] tw-text-gray-200 tw-rounded-md focus:tw-border-[#7e22ce]"
-                    placeholder="Ingresa tu correo"
-                    required
-                />
+            <!-- VOTACIÓN: 4 FUNCIONALIDADES -->
+            <form id="form_voting" class="tw-flex tw-flex-col tw-gap-4 tw-w-full">
+                <div class="tw-text-lg tw-font-medium">Selecciona la funcionalidad que más te interesa:</div>
 
-                <!-- SELECT -->
-                <div class="tw-relative tw-w-full">
-                    <select
-                        id="opcion"
-                        required
-                        class="tw-appearance-none tw-h-full tw-w-full tw-bg-[#0d0d0d] tw-text-gray-400 tw-border tw-border-gray-600 tw-rounded-md tw-px-3 tw-pr-8 tw-py-2 tw-outline-none tw-transition-colors tw-duration-300 hover:tw-border-[#7e22ce] focus:tw-border-[#7e22ce] focus:tw-ring-1 focus:tw-ring-[#7e22ce]"
-                    >
-                        <option value="" disabled selected hidden>
-                            Selecciona un espacio
-                        </option>
-                        <option value="auditorio">Auditorio</option>
-                        <option value="laboratorio">Laboratorio</option>
-                        <option value="area-verde">Área verde</option>
-                        <option value="sala-reuniones">Sala de reuniones</option>
-                    </select>
+                <div class="tw-flex tw-flex-col tw-gap-2">
+                    <label class="tw-flex tw-items-center tw-gap-3">
+                        <input type="radio" name="feature" value="checkin_qr" required />
+                        <span>1. Check in / out con QR para confirmar asistencia</span>
+                    </label>
 
-                    <!-- Flecha personalizada -->
-                    <svg
-                        class="tw-pointer-events-none tw-absolute tw-right-3 tw-top-1/2 tw-h-4 tw-w-4 tw--translate-y-1/2 tw-text-gray-400"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                    >
-                        <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M19 9l-7 7-7-7"
-                        />
-                    </svg>
+                    <label class="tw-flex tw-items-center tw-gap-3">
+                        <input type="radio" name="feature" value="report_loss" />
+                        <span>2. Reportar pérdida o daño de implementos asignados</span>
+                    </label>
+
+                    <label class="tw-flex tw-items-center tw-gap-3">
+                        <input type="radio" name="feature" value="repeat_reservations" />
+                        <span>3. Repetir reservas según patrón de historial</span>
+                    </label>
+
+                    <label class="tw-flex tw-items-center tw-gap-3">
+                        <input type="radio" name="feature" value="chat_admin" />
+                        <span>4. Chat con administradores de espacios</span>
+                    </label>
                 </div>
 
-                <!-- BOTÓN -->
-                <button
-                    type="submit"
-                    class="btn !tw-rounded-full !tw-border-[1px] !tw-border-solid !tw-border-gray-300 !tw-bg-transparent tw-transition-colors tw-duration-[0.3s] hover:tw-bg-[#7e22ce85] hover:tw-border-[#7e22ce] tw-text-gray-200"
-                >
-                    <i class="bi bi-chevron-right"> Enviar </i>
-                </button>
-            </form>
+                <div class="tw-flex tw-gap-3 tw-items-center">
+                    <button type="submit" id="btn_save_vote" class="btn !tw-rounded-full !tw-border-[1px] !tw-border-solid !tw-border-gray-300 !tw-bg-transparent tw-transition-colors tw-duration-[0.3s] hover:tw-bg-[#7e22ce85] hover:tw-border-[#7e22ce] tw-text-gray-200">Guardar voto</button>
+                    <div id="vote_status" class="tw-text-sm tw-text-gray-400"></div>
+                </div>
 
-            <!-- MENSAJE DE RESPUESTA -->
-            <div id="mensaje" class="tw-text-sm tw-mt-2 tw-text-gray-400"></div>
+                <!-- Podio / Resultados en tiempo real -->
+                <div id="vote_podium" class="tw-mt-4 tw-flex tw-flex-col tw-gap-3 tw-w-full tw-max-w-[600px]"></div>
+            </form>
         </div>
 
         <div
@@ -424,6 +400,7 @@
 
 <!-- Enlazar el JS -->
 <script src="./js/correo.js"></script>
+<script type="module" src="./js/file01.js"></script>
 
     </body>
 
