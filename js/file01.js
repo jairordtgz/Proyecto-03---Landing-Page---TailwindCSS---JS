@@ -1,9 +1,5 @@
-import { fetchProducts, fetchCategories } from "./functions.js";
 "use strict";
 import { saveVotes, listenVotes } from "./firebase.js";
-
-
-
 
 let enableForm = () => {
     const form = document.getElementById("form_voting");
@@ -43,10 +39,10 @@ const renderPodium = (counts) => {
 
     // lista de features con etiquetas legibles
     const items = [
-        { id: "checkin_qr", label: "Check in / out (QR)" },
-        { id: "report_loss", label: "Reportar pérdida / daño" },
-        { id: "repeat_reservations", label: "Repetir reservas" },
-        { id: "chat_admin", label: "Chat con administradores" },
+        { id: "checkin_qr", label: "Check in / out (QR) " },
+        { id: "report_loss", label: "Reportar pérdida / daño " },
+        { id: "repeat_reservations", label: "Repetir reservas " },
+        { id: "chat_admin", label: "Chat con administradores " },
     ];
 
     const maxCount = Math.max(...Object.values(counts), 1);
@@ -63,8 +59,7 @@ const renderPodium = (counts) => {
         row.className = "tw-flex tw-flex-col tw-gap-1 tw-py-2 tw-px-2 tw-bg-[#0b0b0b] tw-rounded";
         row.innerHTML = `
             <div class="tw-flex tw-justify-between">
-                <div class="tw-font-medium">${index + 1}. ${it.label}</div>
-                <div class="tw-font-semibold">${value} votos</div>
+                <div class="tw-font-medium">${index + 1}. ${it.label}:  ${value} votos </div>
             </div>
             <div class="tw-h-2 tw-w-full tw-bg-gray-800 tw-rounded">
                 <div class="tw-h-2 tw-bg-[#7e22ce] tw-rounded" style="width: ${percent}%"></div>
@@ -76,13 +71,7 @@ const renderPodium = (counts) => {
 };
 
 (() => {
-    showToast();
-    showVideo(); 
-    renderProducts(); 
-    renderCategories();
         enableForm();
-
-        // Iniciar escucha en tiempo real de votos y actualizar podio
         listenVotes((counts) => {
             renderPodium(counts);
         });
